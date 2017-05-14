@@ -32,6 +32,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // 重力を設定
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -4.0)
+        physicsWorld.contactDelegate = self
         
         // 背景色を設定
         backgroundColor = UIColor(colorLiteralRed: 0.15, green: 0.75, blue: 0.90, alpha: 1)
@@ -290,7 +291,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     
  
-    // SKPhysicsContactDelegateのメソッド。衝突したときに呼ばれる
+    // SKPhysicsContactDelegateのメソッド。衝突したときに呼ばれる  //self宣言が抜けてた
     func didBegin(_ contact: SKPhysicsContact) {
         // ゲームオーバーのときは何もしない
         if scrollNode.speed <= 0 {
@@ -332,7 +333,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func restart() {
         score = 0
-        scoreLabelNode.text = String("Score:\(score)") 
+        scoreLabelNode.text = String("Score:\(score)")
         
         bird.position = CGPoint(x: self.frame.size.width * 0.2, y:self.frame.size.height * 0.7)
         bird.physicsBody?.velocity = CGVector.zero
